@@ -1,30 +1,22 @@
 const { Schema, model } = require('mongoose');
 
-const COLLECTION_NAME = 'Reports';
-const DOCUMENT_NAME = 'Report';
+const COLLECTION_NAME = 'Ratings';
+const DOCUMENT_NAME = 'Rating';
 
-const reportSchema = new Schema(
+const ratingSchema = new Schema(
    {
       userId: {
          type: Schema.Types.ObjectId,
          ref: 'User',
          required: true,
       },
+      rate: {
+         type: Number,
+         default: 5,
+      },
       bookId: {
          type: Schema.Types.ObjectId,
          ref: 'Book',
-         required: true,
-      },
-      title: {
-         type: String,
-         required: true,
-      },
-      content: {
-         type: String,
-         required: true,
-      },
-      image: {
-         type: String,
       },
       createdAt: {
          type: Date,
@@ -37,6 +29,6 @@ const reportSchema = new Schema(
    }
 );
 
-const Report = model(DOCUMENT_NAME, reportSchema);
+export const Rating = model(DOCUMENT_NAME, ratingSchema);
 
-module.exports = Report;
+// module.exports = Book;

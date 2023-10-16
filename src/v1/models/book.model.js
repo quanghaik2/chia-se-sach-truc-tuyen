@@ -18,6 +18,10 @@ const bookSchema = new Schema(
          type: String,
          required: true,
       },
+      ratingAverage: {
+         type: Number,
+         default: 5,
+      },
       slug: {
          type: String,
          required: true,
@@ -49,3 +53,5 @@ const bookSchema = new Schema(
 export const Book = model(DOCUMENT_NAME, bookSchema);
 
 // module.exports = Book;
+
+// add, update, delete (isDeleted), rating, search, getById, getBySlug
