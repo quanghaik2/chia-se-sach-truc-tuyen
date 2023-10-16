@@ -82,3 +82,5 @@ const userSchema = new Schema(
 const User = model(DOCUMENT_NAME, userSchema);
 
 module.exports = User;
+
+// login, signup
