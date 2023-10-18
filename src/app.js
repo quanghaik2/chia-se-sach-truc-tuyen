@@ -9,18 +9,15 @@ require('dotenv').config();
 
 // init middlewares
 app.use(morgan('dev')); // morgan('combined') full thong tin
-app.use(helmet()); // bao ve thong tin rieng tu, ngan chan web thu 3 truy cap doc thong tin, cookie
+// app.use(helmet()); // bao ve thong tin rieng tu, ngan chan web thu 3 truy cap doc thong tin, cookie
 app.use(compression()); // giam dung luong van chuyen du lieu web
-let whiteList = [
-   'http://localhost:3000',
-   `${process.env.URL_FRONTEND}`,
-   'https://chia-se-sach.vercel.app'
-];
+// let whiteList = [
+//    'http://localhost:3000',
+//    `${process.env.URL_FRONTEND}`,
+//    'https://chia-se-sach.vercel.app'
+// ];
 app.use(
-   cors({
-      origin: whiteList,
-      credentials: true,
-   })
+   cors()
 );
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -33,7 +30,7 @@ app.get('/', (req, res) => {
 require('./v1/configs/init.mongodb');
 
 // init routes
-require('./v1/routes/index.route')(app);
+require('./v1/routers/index')(app);
 
 // handling error
 app.use((req, res, next) => {
