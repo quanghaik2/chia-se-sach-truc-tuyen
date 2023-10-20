@@ -22,7 +22,7 @@ const updateBook = async (req, res, next) => {
 
 const softDeleteBook = async (req, res, next) => {
     try {
-        const book = await service.book.softDeleteBook(req.body.bookId,req.body.userId);
+        const book = await service.book.softDeleteBook(req.body.bookId,req.user);
         res.status(200).json(book);
     } catch (error) {
         next(error);

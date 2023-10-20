@@ -29,7 +29,7 @@ const register = ({username,password,...body}) => new Promise(async(resolve, rej
     const refreshToken = util.token({username: data.username},'1d');
 
     resolve({
-        err: data ? true : false,
+        err: !data ? true : false,
         message: data ? "Registered successful" : "Registration failed",
         data: data ? data : null,
         token: token ? token : null,
@@ -67,7 +67,7 @@ const login = ({username,password,...body}) => new Promise(async(resolve, reject
     const refreshToken = util.token({username: data.username}, '1d');
 
     resolve({
-        err: data ? true : false,
+        err: !data ? true : false,
         message: data ? "Login successful" : "Login failed",
         data: data ? dataObject : null,
         token: token? token : null,
@@ -92,7 +92,7 @@ const refreshToken = (refreshToken) => new Promise(async (resolve, reject) => {
     const token = util.token(dataObject,'1d');
     const refreshToken = util.token({username: data.username},'1d');
     resolve({
-        err: data? true : false,
+        err: !data? true : false,
         message: data? "Refresh token successful" : "Refresh token failed",
         data: data? dataObject : null,
         token: token? token : null,

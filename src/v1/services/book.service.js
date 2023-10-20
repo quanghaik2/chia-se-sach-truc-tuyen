@@ -18,7 +18,7 @@ const createBook = ({title,...body},userId) => new Promise(async (resolve, rejec
     }
 
     resolve({
-        err: data? true : false,
+        err: !data? true : false,
         message: data? "Book created successful" : "Book creation failed",
         data: data? data : null,
     })
@@ -32,7 +32,7 @@ const updateBook = ({bookId,...body}) => new Promise(async (resolve, reject) => 
 
 
     resolve({
-        err: data? true : false,
+        err: !data? true : false,
         message: data? "Book updated successful" : "Book update failed",
         data: data? data : null,
     })
@@ -46,7 +46,7 @@ const softDeleteBook = ({id,...body}, userId) => new Promise(async (resolve, rej
         await models.User.findByIdAndUpdate(userId, {$pull: {bookList: id}});
     }
     resolve({
-        err: data? true : false,
+        err: !data? true : false,
         message: data? "Book deleted successful" : "Book deletion failed",
         data: data? data : null,
     })
@@ -57,7 +57,7 @@ const softDeleteBook = ({id,...body}, userId) => new Promise(async (resolve, rej
 const getOneBook = (slug) => new Promise(async (resolve, reject) => {
     const data = await bookRepostiories.findOneBook(slug);
     resolve({
-        err: data? true : false,
+        err: !data? true : false,
         message: data? "Book found" : "Book not found",
         data: data? data : null,
     })
@@ -66,7 +66,7 @@ const getOneBook = (slug) => new Promise(async (resolve, reject) => {
 const getBookId = (id) => new Promise(async(resolve, reject) => {
     const data = await bookRepostiories.findByIdBook(id);
     resolve({
-        err: data? true : false,
+        err: !data? true : false,
         message: data? "Book found" : "Book not found",
         data: data? data : null,
     })
@@ -75,7 +75,7 @@ const getBookId = (id) => new Promise(async(resolve, reject) => {
 const getAllBooks = ()=> new Promise(async (resolve, reject) => {
     const data = await models.Book.find();
     resolve({
-        err: data? true : false,
+        err: !data? true : false,
         data: data? data : null,
     });
 });
