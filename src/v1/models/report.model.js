@@ -26,6 +26,11 @@ const reportSchema = new Schema(
       image: {
          type: String,
       },
+      status: {
+         type: String,
+         enum: ['pending', 'approved', 'rejected'],
+         default: 'pending',
+      },
       createdAt: {
          type: Date,
          default: Date.now,
@@ -38,5 +43,4 @@ const reportSchema = new Schema(
 );
 
 const Report = model(DOCUMENT_NAME, reportSchema);
-
 module.exports = Report;

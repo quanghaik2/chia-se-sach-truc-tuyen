@@ -29,6 +29,6 @@ const ratingSchema = new Schema(
    }
 );
 
-export const Rating = model(DOCUMENT_NAME, ratingSchema);
+const Rating = model(DOCUMENT_NAME, ratingSchema);
 
-// module.exports = Book;
+module.exports = Book;

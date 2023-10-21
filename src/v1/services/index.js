@@ -1,5 +1,6 @@
 module.exports = {
-    auth: require("./auth.service"),
-    user: require("./user.service"),
-    book: require("./book.service"),
+   report: require('./report.service'),
+   auth: require('./auth.service'),
+   user: require('./user.service'),
+   book: require('./book.service'),
 };
