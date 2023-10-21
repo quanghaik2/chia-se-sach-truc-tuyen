@@ -4,7 +4,7 @@ const middleware = require('../middlewares');
 
 //get routes
 
-router.get('/getAllBooks', controllers.book.getAllBooks);
+router.get('/', controllers.book.getAllBooks);
 router.get('/getOneBook/:slug', controllers.book.getOneBook);
 router.get('/getBookId/:id', controllers.book.getBookId);
 // Post routes
