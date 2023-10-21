@@ -1,6 +1,7 @@
 const bcryptjs = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { v4 : uuidv4 } = require('uuid');
+const models = require('../models');
 require('dotenv').config();
 
 const hashPassword = (password) =>{
@@ -30,10 +31,16 @@ const createSlug = (title) => {
     return slug;
 }
 
+const checkFavorites = async (userId,bookId) => {
+    const user = await models.User.findById(userId);
+    return user.favoriteList.includes(bookId);
+}
+
 module.exports = {
     hashPassword,
     checkPassword,
     token,
     verifyToken,
     createSlug,
+    checkFavorites,
 }

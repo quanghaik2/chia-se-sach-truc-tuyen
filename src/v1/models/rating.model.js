@@ -31,4 +31,4 @@ const ratingSchema = new Schema(
 
 const Rating = model(DOCUMENT_NAME, ratingSchema);
 
-module.exports = Book;
+module.exports = Rating;

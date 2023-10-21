@@ -1,4 +1,5 @@
 const { Schema, model } = require('mongoose');
+const { comment } = require('../services');
 
 const COLLECTION_NAME = 'Comments';
 const DOCUMENT_NAME = 'Comment';
@@ -31,4 +32,5 @@ const commentSchema = new Schema(
 );
 
 const Comment = model(DOCUMENT_NAME, commentSchema);
+
 module.exports = Comment;
