@@ -50,8 +50,8 @@ const bookSchema = new Schema(
    }
 );
 
-export const Book = model(DOCUMENT_NAME, bookSchema);
+ const Book = model(DOCUMENT_NAME, bookSchema);
 
-// module.exports = Book;
+module.exports = Book;
 
 // add, update, delete (isDeleted), rating, search, getById, getBySlug
