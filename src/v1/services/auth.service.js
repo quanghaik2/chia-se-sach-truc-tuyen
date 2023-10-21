@@ -75,9 +75,10 @@ const login = ({username,password,...body}) => new Promise(async(resolve, reject
     })
 });
 
-const refreshToken = (refreshToken) => new Promise(async (resolve, reject) => {
-    const username = util.verifyToken(refreshToken);
-    const data = await userRepositories.findOneUser(username);
+const refreshToken = (refresh) => new Promise(async (resolve, reject) => {
+    console.log(refresh);
+    const username = util.verifyToken(refresh);
+    const data = await userRepositories.findOneUser(username.username);
     if(!data) {
         resolve({
             err: true,
@@ -90,13 +91,13 @@ const refreshToken = (refreshToken) => new Promise(async (resolve, reject) => {
     delete dataObject.role;
 
     const token = util.token(dataObject,'1d');
-    const refreshToken = util.token({username: data.username},'1d');
+    const newRefreshToken = util.token({username: data.username},'1d');
     resolve({
         err: !data? true : false,
         message: data? "Refresh token successful" : "Refresh token failed",
         data: data? dataObject : null,
         token: token? token : null,
-        refreshToken: refreshToken? refreshToken : null,
+        refreshToken: newRefreshToken? newRefreshToken : null,
     })
 })
 

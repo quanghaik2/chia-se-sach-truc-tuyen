@@ -26,8 +26,8 @@ const login =async (req,res,next) =>{
 
 const refreshToken = async (req, res) => {
     try {
-        const user = await service.auth.refreshToken(req.body.refreshToken);
-        const {token,refreshToken,...data} = user;
+        const data = await service.auth.refreshToken(req.cookies.refreshToken.refreshToken);
+        const {token,refreshToken,...User} = data;
         res.cookie("token", {token},{ maxAge: 2*60*60000 });
         res.cookie("refreshToken", {refreshToken},{ maxAge: 24*60*60000 });
         res.status(200).json(data);

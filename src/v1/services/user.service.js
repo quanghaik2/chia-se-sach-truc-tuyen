@@ -4,7 +4,7 @@ const util = require('../utils');
 
 // get User
 const getAllUsers = () => new Promise(async (resolve, reject) => {
-    const data = await model.User.find({}).select('-password -role');
+    const data = await models.User.find({}).select('-password -role');
     resolve({
         data: data ? data : null,
     })

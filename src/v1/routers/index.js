@@ -8,7 +8,7 @@ const routes = (app) => {
     app.use('/api/auth', authRouter);
     app.use('/api/user', userRouter);
     app.use('/api/book', bookRouter);
-    app.use('/api/comments', commentRouter);
+    app.use('/api/comment', commentRouter);
     app.use('/api/favorite', favorite);
 };
 
