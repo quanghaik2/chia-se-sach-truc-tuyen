@@ -2,8 +2,6 @@ const service = require('../services');
 
 const createBook = async (req, res, next) => {
     try {
-        const userid = req.user;
-        console.log(userid);
         const book = await service.book.createBook(req.body,req.user);
         res.status(200).json(book);
     } catch (error) {
@@ -14,7 +12,10 @@ const createBook = async (req, res, next) => {
 const updateBook = async (req, res, next) => {
     try {
         const book = await service.book.updateBook(req.body);
-        res.status(200).json(book);
+        if(!book.err){
+            return res.status(404).json(book);
+        }
+        return res.status(200).json(book);
     } catch (error) {
         next(error);
     }

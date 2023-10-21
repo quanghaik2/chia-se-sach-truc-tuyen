@@ -4,12 +4,13 @@ const middleware = require('../middlewares');
 
 
 //get request
+router.get('/', middleware.checkRole, controller.comment.getAllComments);
 router.get('/getCommentsByBookId', middleware.checkToken, controller.comment.getCommentsByBookId);
 router.get('/getCommentsByUserId', middleware.checkToken, controller.comment.getCommentsByUserId);
 //Post request
-router.post('/createComment', middleware.checkToken, controller.comment.createComment);
+router.post('/', middleware.checkToken, controller.comment.createComment);
 //put request
-router.put('/updateComment', middleware.checkToken, controller.comment.updateComment);
-router.put('/softDeleteComment', middleware.checkToken, controller.comment.softDeleteComment);
+router.put('/', middleware.checkToken, controller.comment.updateComment);
+router.put('/softDelete', middleware.checkToken, controller.comment.softDeleteComment);
 
 module.exports = router;

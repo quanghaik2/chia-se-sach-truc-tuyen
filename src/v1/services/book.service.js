@@ -27,6 +27,10 @@ const createBook = ({title,...body},userId) => new Promise(async (resolve, rejec
 // update the book
 
 const updateBook = ({bookId,...body}) => new Promise(async (resolve, reject) => {
+    if(body.hasOwnProperty('title')){
+        body.slug = util.createSlug(body.title);
+    }
+
     const Book = models.Book;
     const data = await Book.findByIdAndUpdate(bookId, body, {new: true});
 

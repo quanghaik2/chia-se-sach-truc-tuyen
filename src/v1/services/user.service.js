@@ -10,7 +10,7 @@ const getAllUsers = () => new Promise(async (resolve, reject) => {
     })
 })
 
-const getAUser = (userId) => new Promise(async (resolve, reject) => {
+const getOneUser = (userId) => new Promise(async (resolve, reject) => {
     const data = await userRepositories.findByIdUser(userId);
     resolve({
         err: data ? true : false,
@@ -18,6 +18,15 @@ const getAUser = (userId) => new Promise(async (resolve, reject) => {
         data: data? data : null,
     })
 });
+
+const getUserByName = (name) => new Promise(async (resolve, reject) => {
+    const data = await models.User.find({name});
+    resolve({
+        err: data? true : false,
+        message: data? "Get user successfully" : "User not found",
+        data: data? data : null,
+    })
+})
 
 // update user
 const updateUser = (userId,{...body}) => new Promise(async (resolve, reject) => {
@@ -32,6 +41,8 @@ const updateUser = (userId,{...body}) => new Promise(async (resolve, reject) => 
 
     const data = await models.User.findByIdAndUpdate(user.id, {
         ...body,
+    }, {
+        new: true
     })
     resolve({
         err: data? true : false,
@@ -63,7 +74,9 @@ const softDeleteUser = (userId) => new Promise(async (resolve, reject) => {
 
 module.exports = {
     getAllUsers,
-    getAUser,
+    getOneUser,
+    getUserByName,
     updateUser,
     softDeleteUser,
+
 }

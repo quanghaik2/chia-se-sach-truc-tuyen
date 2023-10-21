@@ -5,7 +5,7 @@ const createComment = async (req, res, next) => {
         const {bookId, content} = req.body;
         const userId = req.user;
         const comment = await service.comment.createComment({bookId, content}, userId);
-        if(!comment.err){
+        if(comment.err){
             return res.status(404).json(comment);
         }
 
@@ -21,7 +21,7 @@ const updateComment = async (req, res, next) => {
         const {commentId, content} = req.body;
         const userId = req.user;
         const comment = await service.comment.updateComment({commentId, content}, userId);
-        if(!comment.err){
+        if(comment.err){
             return res.status(404).json(comment);
         }
         return res.status(200).json(comment);
@@ -36,7 +36,7 @@ const softDeleteComment = async (req, res, next) => {
         const {commentId} = req.body;
         const userId = req.user;
         const comment = await service.comment.softDeleteComment({commentId}, userId);
-        if(!comment.err){
+        if(comment.err){
             return res.status(404).json(comment);
         }
         return res.status(200).json(comment);
@@ -49,8 +49,8 @@ const softDeleteComment = async (req, res, next) => {
 const getCommentsByBookId = async (req, res, next) => {
     try {
         
-        const comment = await service.comment.getCommentsByBookId(req.body.bookId);
-        if(!comment.err){
+        const comment = await service.comment.getCommentsByBookId(req.params.bookId);
+        if(comment.err){
             return res.status(404).json(comment);
         }
         return res.status(200).json(comment);
@@ -64,7 +64,20 @@ const getCommentsByUserId = async (req, res, next) => {
     try {
         const userId = req.user;
         const comment = await service.comment.getCommentsByUserId(userId);
-        if(!comment.err){
+        if(comment.err){
+            return res.status(404).json(comment);
+        }
+        return res.status(200).json(comment);
+        
+    } catch (err) {
+        next(err);
+    }
+}
+
+const getAllComments = async (req, res, next) => {
+    try {
+        const comment = await service.comment.getAllComments();
+        if(comment.err){
             return res.status(404).json(comment);
         }
         return res.status(200).json(comment);
@@ -80,4 +93,5 @@ module.exports = {
     softDeleteComment,
     getCommentsByBookId,
     getCommentsByUserId,
+    getAllComments,
 };

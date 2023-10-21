@@ -11,12 +11,15 @@ const createComment = ({bookId,...body}, userId) => new Promise(async (resolve, 
     }
     const data = new Comment({
         userId,
-        bookId: book.id,
+        bookId,
         ...body,
     });
 
+    data.save();
+
     if(data){
         await models.Book.findByIdAndUpdate(data.bookId,{$push: {commentList: data.id}});
+        await models.User.findByIdAndUpdate(data.userId,{$push: {commentedList: data.id}});
     }
 
     resolve({
@@ -44,7 +47,7 @@ const updateComment = ({commentId,...body},userId) => new Promise(async (resolve
             }
         );
     } 
-    const data =await models.Comment.findById(commentId, {...body});
+    const data =await models.Comment.findByIdAndUpdate(commentId, {...body}, {new: true});
 
     resolve({
         err: !data? true : false,
@@ -108,10 +111,19 @@ const getCommentsByUserId = (userId) => new Promise((resolve, reject) => {
     });
 });
 
+const getAllComments = () => new Promise(async (resolve, reject) => {
+    const data = await models.Comment.find();
+    resolve({
+        err:!data? true : false,
+        data: data? data : null,
+    });
+})
+
 module.exports = {
     createComment,
     updateComment,
     softDeleteComment,
     getCommentsByBookId,
     getCommentsByUserId,
+    getAllComments,
 };
