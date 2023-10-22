@@ -3,8 +3,8 @@ const controller = require('../controllers');
 const middleware = require('../middlewares');
 // Get request
 router.get('/', controller.user.getAllUsers);
-router.get('/getOneUser', controller.user.getOneUser);
-router.get('/getUserByName', controller.user.getUserByName);
+router.get('/getOneUser/:userId', controller.user.getOneUser);
+router.get('/getUserByName/:name', controller.user.getUserByName);
 router.get('/getCurrent',middleware.checkToken, controller.user.getCurrent);
 
 // Put request
