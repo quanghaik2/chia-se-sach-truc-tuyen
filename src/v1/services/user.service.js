@@ -15,7 +15,7 @@ const getOneUser = (userId) =>
    new Promise(async (resolve, reject) => {
       const data = await userRepositories.findByIdUser(userId);
       resolve({
-         err: data ? true : false,
+         err: data ? false : true,
          message: data ? 'Get user successfully' : 'User not found',
          data: data ? data : null,
       });
@@ -25,7 +25,7 @@ const getUserByName = (name) =>
    new Promise(async (resolve, reject) => {
       const data = await models.User.find({ name });
       resolve({
-         err: data ? true : false,
+         err: data ? false : true,
          message: data ? 'Get user successfully' : 'User not found',
          data: data ? data : null,
       });
@@ -53,7 +53,7 @@ const updateUser = (userId, { ...body }) =>
          }
       );
       resolve({
-         err: data ? true : false,
+         err: data ? false : true,
          message: data ? 'Update user successfully' : 'Update user failed',
          data: data ? data : null,
       });
@@ -74,7 +74,7 @@ const softDeleteUser = (userId) =>
          isDeleted: true,
       });
       resolve({
-         err: data ? true : false,
+         err: data ? false : true,
          message: data ? 'Delete user successfully' : 'Delete user failed',
          data: data ? data : null,
       });
@@ -83,7 +83,7 @@ const softDeleteUser = (userId) =>
 const getCurrent = (userId) => new Promise(async (resolve, reject) => {
    const data = await models.User.findById(userId);
    resolve({
-      err: data? true : false,
+      err: data? false : true,
       message: data? 'Get user successfully' : 'User not found',
       data: data? data : null,
    });
