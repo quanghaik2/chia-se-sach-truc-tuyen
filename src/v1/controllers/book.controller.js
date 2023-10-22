@@ -12,7 +12,7 @@ const createBook = async (req, res, next) => {
 const updateBook = async (req, res, next) => {
     try {
         const book = await service.book.updateBook(req.body);
-        if(!book.err){
+        if(book.err){
             return res.status(404).json(book);
         }
         return res.status(200).json(book);
