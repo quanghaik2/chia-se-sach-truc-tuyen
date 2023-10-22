@@ -36,7 +36,7 @@ const getUserByName = async (req, res, next) => {
 
 const updateUser = async (req, res, next) => {
     try{
-        const user = await service.user.updateUser(req.body);
+        const user = await service.user.updateUser(req.user);
         if(user.err){
             return res.status(404).json(user);
         }
@@ -58,10 +58,23 @@ const softDeleteUser = async (req, res, next) => {
     }
 }
 
+const getCurrent = async (req, res, next) => {
+    try{
+        const user = await service.user.getCurrent(req.user);
+        if(user.err){
+            return res.status(404).json(user);
+        }
+        return res.status(200).json(user);
+    } catch (error) {
+        next(error);
+    }
+}
+
 module.exports = {
     getAllUsers,
     getOneUser,
     getUserByName,
     updateUser,
     softDeleteUser,
+    getCurrent,
 }

@@ -80,10 +80,20 @@ const softDeleteUser = (userId) =>
       });
    });
 
+const getCurrent = (userId) => new Promise(async (resolve, reject) => {
+   const data = await models.User.findById(userId);
+   resolve({
+      err: data? true : false,
+      message: data? 'Get user successfully' : 'User not found',
+      data: data? data : null,
+   });
+});
+
 module.exports = {
    getAllUsers,
    getOneUser,
    getUserByName,
    updateUser,
    softDeleteUser,
+   getCurrent,
 };
