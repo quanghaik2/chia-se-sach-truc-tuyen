@@ -1,11 +1,12 @@
-# Authentication
-## Login
+# Shared Books API Documentation
+## Authentication
+### Login
  **Method:** POST
  **Endpoint:** https://shared-books.cyclic.app/api/auth/login
  **Request** Body:**
 -   username
 -   password
-# Register
+### Register
  **Method:** POST
  **Endpoint:** https://shared-books.cyclic.app/api/auth/register
  **Request** Body:**
@@ -13,90 +14,90 @@
 -   username
 -   password
 -   avatar
-# Refresh Token
+### Refresh Token
  **Method:** POST
  **Endpoint:** https://shared-books.cyclic.app/api/auth/refreshToken
-User
-Update User
+## User
+### Update User
  **Method:** POST
  **Endpoint:** https://shared-books.cyclic.app/api/user/updateUser
  **Request** Body:
-name
-avatar
-Soft Delete User
+- name
+- avatar
+### Soft Delete User
  **Method:** PUT
  **Endpoint:** https://shared-books.cyclic.app/api/user/softDelete
  **Request** Body:
-userId
-Get All Users
+- userId
+### Get All Users
  **Method:** GET
  **Endpoint:** https://shared-books.cyclic.app/api/user/
-Get One User
+### Get One User
  **Method:** GET
  **Endpoint:** https://shared-books.cyclic.app/api/user/getUser
  **Request Params:**
-userId
-Get User by Name
+- userId
+### Get User by Name
  **Method:** GET
  **Endpoint:** https://shared-books.cyclic.app/api/user/getUserByName
  **Request Params:**
-name
-Books
-Create a Book
+- name
+## Books
+### Create a Book
  **Method:** POST
  **Endpoint:** https://shared-books.cyclic.app/api/book/
  **Request** Body:
-title
-content
-image
-Update Book
+- title
+- content
+- image
+### Update Book
  **Method:** PUT
  **Endpoint:** https://shared-books.cyclic.app/api/book/
  **Request** Body:
-bookId
-title
-content
-image
-Soft Delete Book
+- bookId
+- title
+- content
+- image
+### Soft Delete Book
  **Method:** PUT
  **Endpoint:** https://shared-books.cyclic.app/api/book/softDelete
  **Request** Body:
-bookId
-Get All Books
+- bookId
+### Get All Books
  **Method:** GET
  **Endpoint:** https://shared-books.cyclic.app/api/book/
-Get One Book
+### Get One Book
  **Method:** GET
  **Endpoint:** https://shared-books.cyclic.app/api/book/:slug
  **Request Params:**
-slug
-Comments
-Create a Comment
+- slug
+## Comments
+### Create a Comment
  **Method:** POST
  **Endpoint:** https://shared-books.cyclic.app/api/comment/
  **Request** Body:
-bookId
-comment
-Update Comment
+- bookId
+- comment
+### Update Comment
  **Method:** PUT
  **Endpoint:** https://shared-books.cyclic.app/api/comment/
  **Request** Body:
-commentId
-content
-Soft Delete Comment
+- commentId
+- content
+### Soft Delete Comment
  **Method:** PUT
  **Endpoint:** https://shared-books.cyclic.app/api/comment/softDelete
  **Request** Body:
-commentId
-Get Comments by Book ID
+- commentId
+### Get Comments by Book ID
  **Method:** GET
  **Endpoint:** https://shared-books.cyclic.app/api/comment/getCommentsByBookId
  **Request Params:**
-bookId
-Get Comments by User ID
+- bookId
+### Get Comments by User ID
  **Method:** GET
  **Endpoint:** https://shared-books.cyclic.app/api/comment/getCommentsByUserId
-Get All Comments
+### Get All Comments
  **Method:** GET
  **Endpoint:** https://shared-books.cyclic.app/api/comment
 
