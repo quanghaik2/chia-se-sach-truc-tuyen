@@ -102,22 +102,22 @@
  **Endpoint:** https://shared-books.cyclic.app/api/comment
 
 
-### Api report
+## Api report
 
--  **Get all comments**
-   `Endpoint: https://shared-books.cyclic.app/api/report/`
-   `METHOD: GET`
--  **Create report**
-   `Endpoint: https://shared-books.cyclic.app/api/report/`
-   `METHOD: POST`
-   `BODY: title, bookId, content, image(allow null)`
-   `USER: id (userId or req.body.userId)`
--  **Update report**
-   `Endpoint: https://shared-books.cyclic.app/api/report/:reportId`
-   `METHOD: PATCH`
-   `BODY: status`
-   `PARAMS: reportId`
--  **Delete report**
-   `Endpoint: https://shared-books.cyclic.app/api/report/:reportId`
-   `METHOD: DELETE`
-   `PARAMS: reportId`
+-  **Get all comments** <br>
+   `Endpoint: https://shared-books.cyclic.app/api/report/` <br>
+   `METHOD: GET` <br>
+-  **Create report** <br>
+   `Endpoint: https://shared-books.cyclic.app/api/report/` <br>
+   `METHOD: POST` <br>
+   `BODY: title, bookId, content, image(allow null)` <br>
+   `USER: id (userId or req.body.userId)` <br>
+-  **Update report** <br>
+   `Endpoint: https://shared-books.cyclic.app/api/report/:reportId` <br>
+   `METHOD: PATCH` <br>
+   `BODY: status` <br>
+   `PARAMS: reportId` <br>
+-  **Delete report** <br>
+   `Endpoint: https://shared-books.cyclic.app/api/report/:reportId` <br>
+   `METHOD: DELETE` <br>
+   `PARAMS: reportId` <br>
