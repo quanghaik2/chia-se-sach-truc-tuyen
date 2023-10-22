@@ -3,7 +3,7 @@ const middleware = require('../middlewares');
 const controller = require('../controllers');
 
 // get Router
-
+router.get('/getFavoriteByUser',middleware.checkToken, controller.favorite.getFavoriteByUser );
 // post
 router.post('/favoriteBook', middleware.checkToken, controller.favorite.favoriteBook);
 

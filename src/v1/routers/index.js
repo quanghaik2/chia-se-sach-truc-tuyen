@@ -3,6 +3,7 @@ const userRouter = require('./user.router');
 const bookRouter = require('./book.router');
 const commentRouter = require('./comment.router');
 const favorite = require('./favorite.router');
+const reportRouter = require('./report.router');
 
 const routes = (app) => {
     app.use('/api/auth', authRouter);

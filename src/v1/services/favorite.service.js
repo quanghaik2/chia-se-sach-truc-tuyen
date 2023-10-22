@@ -41,7 +41,16 @@ const unfavorite = (favoriteId) =>
       });
    });
 
+const getFavoriteByUser = (userId) => new Promise(async (resolve, reject) => {
+   const data = await models.Favorite.find({userId});
+   resolve({
+      err:!data? true : false,
+      data: data? data : null,
+   })
+});
+
 module.exports = {
    favoriteBook,
    unfavorite,
+   getFavoriteByUser,
 };

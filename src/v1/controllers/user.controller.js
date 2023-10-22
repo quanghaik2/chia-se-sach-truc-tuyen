@@ -12,7 +12,7 @@ const getAllUsers =async (req,res,next) =>{
 const getOneUser = async (req, res, next) =>{
     try {
         const user = await service.user.getOneUser(req.params.userId);
-        if(!user.err){
+        if(user.err){
             return res.status(404).json(user);
         }
         return res.status(200).json(user);
@@ -24,7 +24,7 @@ const getOneUser = async (req, res, next) =>{
 const getUserByName = async (req, res, next) => {
     try {
         const user = await service.user.getUserByName(req.params.name);
-        if(!user.err){
+        if(user.err){
             return res.status(404).json(user);
         }
         return res.status(200).json(user);
@@ -36,8 +36,8 @@ const getUserByName = async (req, res, next) => {
 
 const updateUser = async (req, res, next) => {
     try{
-        const user = await service.user.updateUser(req.body);
-        if(!user.err){
+        const user = await service.user.updateUser(req.user);
+        if(user.err){
             return res.status(404).json(user);
         }
         return res.status(200).json(user);
@@ -49,7 +49,19 @@ const updateUser = async (req, res, next) => {
 const softDeleteUser = async (req, res, next) => {
     try{
         const user = await service.user.softDeleteUser(req.body.userId);
-        if(!user.err){
+        if(user.err){
+            return res.status(404).json(user);
+        }
+        return res.status(200).json(user);
+    } catch (error) {
+        next(error);
+    }
+}
+
+const getCurrent = async (req, res, next) => {
+    try{
+        const user = await service.user.getCurrent(req.user);
+        if(user.err){
             return res.status(404).json(user);
         }
         return res.status(200).json(user);
@@ -64,4 +76,5 @@ module.exports = {
     getUserByName,
     updateUser,
     softDeleteUser,
+    getCurrent,
 }
