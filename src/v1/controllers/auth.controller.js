@@ -24,7 +24,7 @@ const register = async (req, res, next) => {
             sameSite: 'none',
          }
       );
-      if(user.err){
+      if (user.err) {
          return res.status(401).json(user);
       }
 
@@ -58,7 +58,7 @@ const login = async (req, res, next) => {
             secure: true,
          }
       );
-      if(user.err){
+      if (user.err) {
          return res.status(401).json(user);
       }
 
@@ -78,10 +78,7 @@ const refreshToken = async (req, res) => {
          'token',
          { token },
          {
-            sameSite: 'none',
             maxAge: 2 * 60 * 60000,
-            httpOnly: true,
-            secure: true,
          }
       );
       res.cookie(
@@ -89,12 +86,9 @@ const refreshToken = async (req, res) => {
          { refreshToken },
          {
             maxAge: 24 * 60 * 60000,
-            httpOnly: true,
-            secure: true,
-            sameSite: 'none',
          }
       );
-      if(data.err){
+      if (data.err) {
          return res.status(401).json(data);
       }
 
@@ -103,7 +97,6 @@ const refreshToken = async (req, res) => {
       next(error);
    }
 };
-
 
 module.exports = {
    register,
