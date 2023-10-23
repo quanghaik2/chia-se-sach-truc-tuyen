@@ -1,5 +1,7 @@
 const service = require('../services');
 
+
+
 const register = async (req, res, next) => {
    try {
       const user = await service.auth.register(req.body);
@@ -41,6 +43,7 @@ const login = async (req, res, next) => {
       next(error);
    }
 };
+
 
 const refreshToken = async (req, res) => {
    try {
