@@ -1,12 +1,19 @@
 const service = require('../services');
 
-
-
 const register = async (req, res, next) => {
    try {
       const user = await service.auth.register(req.body);
       const { token, refreshToken, ...data } = user;
-      res.cookie('token', { token }, { maxAge: 2 * 60 * 60000 });
+      res.cookie(
+         'token',
+         { token },
+         {
+            sameSite: 'none',
+            maxAge: 2 * 60 * 60000,
+            httpOnly: true,
+            secure: true,
+         }
+      );
       res.cookie(
          'refreshToken',
          { refreshToken },
@@ -27,7 +34,16 @@ const login = async (req, res, next) => {
    try {
       const user = await service.auth.login(req.body);
       const { token, refreshToken, ...data } = user;
-      res.cookie('token', { token }, { maxAge: 2 * 60 * 60000 });
+      res.cookie(
+         'token',
+         { token },
+         {
+            sameSite: 'none',
+            maxAge: 2 * 60 * 60000,
+            httpOnly: true,
+            secure: true,
+         }
+      );
       res.cookie(
          'refreshToken',
          { refreshToken },
@@ -44,14 +60,22 @@ const login = async (req, res, next) => {
    }
 };
 
-
 const refreshToken = async (req, res) => {
    try {
       const data = await service.auth.refreshToken(
          req.cookies.refreshToken.refreshToken
       );
       const { token, refreshToken, ...User } = data;
-      res.cookie('token', { token }, { maxAge: 2 * 60 * 60000 });
+      res.cookie(
+         'token',
+         { token },
+         {
+            sameSite: 'none',
+            maxAge: 2 * 60 * 60000,
+            httpOnly: true,
+            secure: true,
+         }
+      );
       res.cookie(
          'refreshToken',
          { refreshToken },

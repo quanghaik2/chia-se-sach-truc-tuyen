@@ -105,24 +105,9 @@
 
 ### Get One Book By Slug
 
-<<<<<<< HEAD
  **Method:** GET
  **Endpoint:** <https://shared-books.cyclic.app/api/book/getOneBook/:slug>
  **Request Params:**
-
-- slug
-
-### Get Book Id
-
- **Method:** GET
- **Endpoint:** <https://shared-books.cyclic.app/api/book/getBookId/:id>
- **Request Params:**
-
-- id
-=======
-**Method:** GET
-**Endpoint:** <https://shared-books.cyclic.app/api/book/getOneBook/:slug>
-**Request Params:**
 
 - slug
 
@@ -134,7 +119,6 @@
 
 - id
 
->>>>>>> 60f24bb1c98915bb4a16a51c50f9c5412d79f10b
 ## Comments
 
 ### Create a Comment
@@ -165,15 +149,9 @@
 
 ### Get Comments by Book ID
 
-<<<<<<< HEAD
- **Method:** GET
- **Endpoint:** <https://shared-books.cyclic.app/api/comment/getCommentsByBookId/:bookId>
- **Request Params:**
-=======
 **Method:** GET
-**Endpoint:** <https://shared-books.cyclic.app/api/comment/getCommentsByBookId>
+**Endpoint:** <https://shared-books.cyclic.app/api/comment/getCommentsByBookId/:bookId>
 **Request Params:**
->>>>>>> 60f24bb1c98915bb4a16a51c50f9c5412d79f10b
 
 - bookId
 
@@ -206,4 +184,3 @@
     `Endpoint: https://shared-books.cyclic.app/api/report/:reportId`\
     `METHOD: DELETE`\
     `PARAMS: reportId`
-
