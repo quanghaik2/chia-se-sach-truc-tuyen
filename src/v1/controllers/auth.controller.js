@@ -8,10 +8,7 @@ const register = async (req, res, next) => {
          'token',
          { token },
          {
-            sameSite: 'none',
             maxAge: 2 * 60 * 60000,
-            httpOnly: true,
-            secure: true,
          }
       );
       res.cookie(
@@ -19,9 +16,6 @@ const register = async (req, res, next) => {
          { refreshToken },
          {
             maxAge: 24 * 60 * 60000,
-            httpOnly: true,
-            secure: true,
-            sameSite: 'none',
          }
       );
       if (user.err) {
@@ -42,20 +36,14 @@ const login = async (req, res, next) => {
          'token',
          { token },
          {
-            sameSite: 'none',
             maxAge: 2 * 60 * 60000,
-            httpOnly: true,
-            secure: true,
          }
       );
       res.cookie(
          'refreshToken',
          { refreshToken },
          {
-            sameSite: 'none',
             maxAge: 24 * 60 * 60000,
-            httpOnly: true,
-            secure: true,
          }
       );
       if (user.err) {
