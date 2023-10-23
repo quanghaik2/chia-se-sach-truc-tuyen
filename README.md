@@ -186,7 +186,7 @@
 
 - **Method:** get
 - **Endpoint:** `https://shared-books.cyclic.app/api/favorite/getFavoriteByUser`
--**body:** 
+- **body:** 
     - bookId
 
 
@@ -194,11 +194,10 @@
 
 - **Method:** POST
 - **Endpoint:** `https://shared-books.cyclic.app/api/favorite/favoriteBook`
--**body:** 
+- **body:** 
     - bookId
 
 ### Unfavorite Book
 
 - **Method:** DELETE
 - **Endpoint:** `https://shared-books.cyclic.app/api/favorite/unFavoriteBook`
-- **Middleware:** `checkToken`
