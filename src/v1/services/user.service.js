@@ -13,7 +13,7 @@ const getAllUsers = () =>
 
 const getOneUser = (userId) =>
    new Promise(async (resolve, reject) => {
-      const data = await userRepositories.findByIdUser(userId);
+      const data = await userRepositories.findByIdUser(userId).select('-password -role');
       resolve({
          err: data ? false : true,
          message: data ? 'Get user successfully' : 'User not found',
@@ -23,7 +23,7 @@ const getOneUser = (userId) =>
 
 const getUserByName = (name) =>
    new Promise(async (resolve, reject) => {
-      const data = await models.User.find({ name });
+      const data = await models.User.find({ name }).select('-password -role');
       resolve({
          err: data ? false : true,
          message: data ? 'Get user successfully' : 'User not found',

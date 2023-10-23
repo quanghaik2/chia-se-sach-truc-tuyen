@@ -24,7 +24,11 @@ const register = async (req, res, next) => {
             sameSite: 'none',
          }
       );
-      res.status(200).json(data);
+      if(user.err){
+         return res.status(401).json(user);
+      }
+
+      return res.status(200).json(user);
    } catch (error) {
       next(error);
    }
@@ -54,7 +58,11 @@ const login = async (req, res, next) => {
             secure: true,
          }
       );
-      res.status(200).json(data);
+      if(user.err){
+         return res.status(401).json(user);
+      }
+
+      return res.status(200).json(user);
    } catch (error) {
       next(error);
    }
@@ -86,11 +94,17 @@ const refreshToken = async (req, res) => {
             sameSite: 'none',
          }
       );
-      res.status(200).json(data);
+      if(data.err){
+         return res.status(401).json(data);
+      }
+
+      return res.status(200).json(data);
    } catch (error) {
       next(error);
    }
 };
+
+
 module.exports = {
    register,
    login,

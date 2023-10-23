@@ -8,6 +8,7 @@ const register = ({ username, password, ...body }) =>
       console.log({
          username,
          password,
+         name: body.name
       });
       const user = await userRepositories.findOneUser(username);
       if (user) {
@@ -26,13 +27,19 @@ const register = ({ username, password, ...body }) =>
 
       await data.save();
 
+
+      const dataObject = data.toObject();
+      console.log(dataObject);
+      delete dataObject.password;
+      delete dataObject.role;
+
       const token = util.token(data, '2h');
       const refreshToken = util.token({ username: data.username }, '1d');
 
       resolve({
          err: !data ? true : false,
          message: data ? 'Registered successful' : 'Registration failed',
-         data: data ? data : null,
+         data: data ? dataObject : null,
          token: token ? token : null,
          refreshToken: refreshToken ? refreshToken : null,
       });
@@ -101,6 +108,8 @@ const refreshToken = (refresh) =>
          refreshToken: newRefreshToken ? newRefreshToken : null,
       });
    });
+
+   
 
 module.exports = {
    register,
