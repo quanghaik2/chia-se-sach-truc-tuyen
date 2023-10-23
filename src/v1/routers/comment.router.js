@@ -5,7 +5,7 @@ const middleware = require('../middlewares');
 
 //get request
 router.get('/', middleware.checkRole, controller.comment.getAllComments);
-router.get('/getCommentsByBookId', middleware.checkToken, controller.comment.getCommentsByBookId);
+router.get('/getCommentsByBookId/:bookId', middleware.checkToken, controller.comment.getCommentsByBookId);
 router.get('/getCommentsByUserId', middleware.checkToken, controller.comment.getCommentsByUserId);
 //Post request
 router.post('/', middleware.checkToken, controller.comment.createComment);

@@ -6,7 +6,7 @@ const register =async (req,res,next) =>{
         const {token,refreshToken,...data} = user;
         res.cookie("token", {token},{ maxAge: 2*60*60000 });
         res.cookie("refreshToken", {refreshToken},{ maxAge: 24*60*60000 });
-        res.status(200).json(data);
+        return res.status(200).json(data);
     } catch (error) {
         next(error);
     }
@@ -18,7 +18,7 @@ const login =async (req,res,next) =>{
         const {token,refreshToken,...data} = user;
         res.cookie("token", {token},{ maxAge: 2*60*60000 });
         res.cookie("refreshToken", {refreshToken},{ maxAge: 24*60*60000 });
-        res.status(200).json(data);
+        return res.status(200).json(data);
     } catch (error) {
         next(error);
     }

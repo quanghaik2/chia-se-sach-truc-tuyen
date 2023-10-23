@@ -106,11 +106,18 @@
 ### Get One Book
 
  **Method:** GET
- **Endpoint:** <https://shared-books.cyclic.app/api/book/:slug>
+ **Endpoint:** <https://shared-books.cyclic.app/api/book/getOneBook/:slug>
  **Request Params:**
 
 - slug
 
+### Get Book Id
+
+ **Method:** GET
+ **Endpoint:** <https://shared-books.cyclic.app/api/book/getBookId/:id>
+ **Request Params:**
+
+- id
 ## Comments
 
 ### Create a Comment
@@ -142,7 +149,7 @@
 ### Get Comments by Book ID
 
  **Method:** GET
- **Endpoint:** <https://shared-books.cyclic.app/api/comment/getCommentsByBookId>
+ **Endpoint:** <https://shared-books.cyclic.app/api/comment/getCommentsByBookId/:bookId>
  **Request Params:**
 
 - bookId
