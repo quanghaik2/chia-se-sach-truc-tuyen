@@ -3,8 +3,11 @@ const service = require('../services');
 const favoriteBook = async (req, res, next) => {
     try {
         const { bookId } = req.body;
-        const result = await service.favorite.favoriteBook(bookId, userId, req.user);
-        res.status(200).json(result);
+        const favorite = await service.favorite.favoriteBook(bookId, req.user);
+        if(favorite.err){
+            return res.status(401).json(favorite);
+        }
+        return res.status(200).json(favorite);
     } catch (error) {
         next(error);
     }
@@ -13,8 +16,11 @@ const favoriteBook = async (req, res, next) => {
 const unFavoriteBook = async (req, res, next) => {
     try{
         const { bookId } = req.body;
-        const result = await service.favorite.unFavoriteBook(bookId, userId, req.user);
-        res.status(200).json(result);
+        const favorite = await service.favorite.unFavoriteBook(bookId, req.user);
+        if(favorite.err){
+            return favorite.status(401).json(favorite);
+        }
+        return res.status(200).json(favorite);
     } catch (err) {
         next(err);
     }
@@ -22,8 +28,11 @@ const unFavoriteBook = async (req, res, next) => {
 
 const getFavoriteByUser = async (req, res, next) => {
     try {
-        const result = await service.favorite.getFavoriteByUser(req.user);
-        res.status(200).json(result);
+        const favorite = await service.favorite.getFavoriteByUser(req.user);
+        if(favorite.err){
+            return res.status(401).json(favorite);
+        }
+        res.status(200).json(favorite);
     } catch (error) {
         next(error);
     }

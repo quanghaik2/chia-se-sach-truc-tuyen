@@ -179,3 +179,26 @@
   - **Method:** DELETE
   - **Params:**
     - reportId
+
+## Favorite
+
+### Get Favorite by User
+
+- **Method:** get
+- **Endpoint:** `https://shared-books.cyclic.app/api/favorite/getFavoriteByUser`
+-**body:** 
+    - bookId
+
+
+### Favorite Book
+
+- **Method:** POST
+- **Endpoint:** `https://shared-books.cyclic.app/api/favorite/favoriteBook`
+-**body:** 
+    - bookId
+
+### Unfavorite Book
+
+- **Method:** DELETE
+- **Endpoint:** `https://shared-books.cyclic.app/api/favorite/unFavoriteBook`
+- **Middleware:** `checkToken`
