@@ -15,6 +15,7 @@ let whiteList = [
    'http://localhost:3000',
    `${process.env.URL_FRONTEND}`,
    'https://chia-se-sach.vercel.app',
+   `https://chia-se-sach.vercel.app/api/comment`
 ];
 app.use(
    cors({
