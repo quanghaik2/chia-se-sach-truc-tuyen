@@ -16,7 +16,7 @@ const createComment = ({ bookId, ...body }, userId) =>
          ...body,
       });
 
-      data.save();
+      await data.save();
 
       if (data) {
          await models.Book.findByIdAndUpdate(data.bookId, {
