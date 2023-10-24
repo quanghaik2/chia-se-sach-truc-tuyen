@@ -86,7 +86,7 @@ const getBookId = (id) =>
 
 const getAllBooks = () =>
    new Promise(async (resolve, reject) => {
-      const data = await models.Book.find();
+      const data = await models.Book.find({});
       resolve({
          err: !data ? true : false,
          data: data ? data : null,

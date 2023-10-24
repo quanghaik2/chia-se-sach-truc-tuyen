@@ -40,9 +40,9 @@ const getAllBooks = async (req, res,next) => {
     try {
         const books = await service.book.getAllBooks();
         if(books.err) {
-            return res.status(401).json(book);
+            return res.status(401).json(books);
         }
-        return res.status(200).json(book);
+        return res.status(200).json(books);
     } catch (error) {
         next(error);
     }
