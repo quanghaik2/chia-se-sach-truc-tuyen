@@ -60,7 +60,7 @@ const softDeleteUser = async (req, res, next) => {
 
 const getCurrent = async (req, res, next) => {
     try{
-        const user = await service.user.getCurrent(req.user);
+        const user = await service.user.getCurrent(req.cookies.token);
         if(user.err){
             return res.status(404).json(user);
         }

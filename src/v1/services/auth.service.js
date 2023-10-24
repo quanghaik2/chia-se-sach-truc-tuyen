@@ -32,7 +32,11 @@ const register = ({ username, password, ...body }) =>
       const dataObject = data.toObject();
       console.log(dataObject);
       delete dataObject.password;
-      delete dataObject.role;
+      // delete dataObject.role;
+      delete dataObject.isDeleted;
+      delete dataObject.createdAt;
+      delete dataObject.updatedAt;
+      delete dataObject.__v;
 
       const token = util.token(data, '2h');
       const refreshToken = util.token({ username: data.username }, '1d');
@@ -72,8 +76,13 @@ const login = ({ username, password, ...body }) =>
       }
 
       const dataObject = data.toObject();
+      console.log(dataObject);
       delete dataObject.password;
-      delete dataObject.role;
+      // delete dataObject.role;
+      delete dataObject.isDeleted;
+      delete dataObject.createdAt;
+      delete dataObject.updatedAt;
+      delete dataObject.__v;
 
       const token = util.token(dataObject, '2h');
       const refreshToken = util.token({ username: data.username }, '1d');
@@ -140,8 +149,13 @@ const refreshToken = (refresh) =>
       }
 
       const dataObject = data.toObject();
+      console.log(dataObject);
       delete dataObject.password;
-      delete dataObject.role;
+      // delete dataObject.role;
+      delete dataObject.isDeleted;
+      delete dataObject.createdAt;
+      delete dataObject.updatedAt;
+      delete dataObject.__v;
 
       const token = util.token(dataObject, '2h');
       const refreshToken = util.token({ username: data.username }, '1d');
