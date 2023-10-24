@@ -38,6 +38,12 @@ const getUserByName = (name) =>
       // const dataObject = data.toObject();
       delete data.iat;
       delete data.exp;
+      delete data.commentedList;
+      delete data.favoriteList;
+      delete data.reportedList;
+      delete data.followerList;
+      delete data.followedList;
+      delete data.bookList;
       resolve({
          err: data? false : true,
          message: data? 'Get user successfully' : 'User not found',
