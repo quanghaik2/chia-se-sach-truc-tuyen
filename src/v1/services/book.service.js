@@ -45,7 +45,7 @@ const updateBook = ({ bookId, ...body }) =>
       });
    });
 
-const softDeleteBook = ({ id, ...body }, userId) =>
+const softDeleteBook = (id, userId) =>
    new Promise(async (resolve, reject) => {
       const data = await models.Book.findByIdAndUpdate(id, {
          isDeleted: true,
