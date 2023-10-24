@@ -9,6 +9,8 @@ const register = async (req, res, next) => {
          { token },
          {
             maxAge: 2 * 60 * 60000,
+            httpOnly: true,
+            sameSite: 'none'
          }
       );
       res.cookie(
@@ -16,6 +18,8 @@ const register = async (req, res, next) => {
          { refreshToken },
          {
             maxAge: 24 * 60 * 60000,
+           httpOnly: true,
+           sameSite: 'none'
          }
       );
       if (user.err) {
@@ -37,6 +41,8 @@ const login = async (req, res, next) => {
          { token },
          {
             maxAge: 2 * 60 * 60000,
+            httpOnly: true,
+            sameSite: 'none'
          }
       );
       res.cookie(
@@ -44,6 +50,8 @@ const login = async (req, res, next) => {
          { refreshToken },
          {
             maxAge: 24 * 60 * 60000,
+            httpOnly: true,
+            sameSite: 'none'
          }
       );
       if (user.err) {
@@ -67,6 +75,8 @@ const refreshToken = async (req, res) => {
          { token },
          {
             maxAge: 2 * 60 * 60000,
+            httpOnly: true,
+            sameSite: 'none'
          }
       );
       res.cookie(
@@ -74,6 +84,8 @@ const refreshToken = async (req, res) => {
          { refreshToken },
          {
             maxAge: 24 * 60 * 60000,
+            httpOnly: true,
+            sameSite: 'none'
          }
       );
       if (data.err) {
@@ -95,6 +107,8 @@ const virtualLoginUser = async (req, res, next) => {
          { token },
          {
             maxAge: 2 * 60 * 60000,
+            httpOnly: true,
+            sameSite: 'none'
          }
       );
       res.cookie(
@@ -102,6 +116,8 @@ const virtualLoginUser = async (req, res, next) => {
          { refreshToken },
          {
             maxAge: 24 * 60 * 60000,
+            httpOnly: true,
+            sameSite: 'none'
          }
       );
       if (user.err) {
