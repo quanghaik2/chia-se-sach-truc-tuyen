@@ -10,7 +10,8 @@ const register = async (req, res, next) => {
          {
             maxAge: 2 * 60 * 60000,
             httpOnly: true,
-            sameSite: 'none'
+            sameSite: 'none',
+            secure: true,
          }
       );
       res.cookie(
@@ -18,8 +19,9 @@ const register = async (req, res, next) => {
          { refreshToken },
          {
             maxAge: 24 * 60 * 60000,
-           httpOnly: true,
-           sameSite: 'none'
+            httpOnly: true,
+            sameSite: 'none',
+            secure: true,
          }
       );
       if (user.err) {
@@ -42,7 +44,8 @@ const login = async (req, res, next) => {
          {
             maxAge: 2 * 60 * 60000,
             httpOnly: true,
-            sameSite: 'none'
+            sameSite: 'none',
+            secure: true,
          }
       );
       res.cookie(
@@ -51,7 +54,8 @@ const login = async (req, res, next) => {
          {
             maxAge: 24 * 60 * 60000,
             httpOnly: true,
-            sameSite: 'none'
+            sameSite: 'none',
+            secure: true,
          }
       );
       if (user.err) {
@@ -76,7 +80,8 @@ const refreshToken = async (req, res) => {
          {
             maxAge: 2 * 60 * 60000,
             httpOnly: true,
-            sameSite: 'none'
+            sameSite: 'none',
+            secure: true,
          }
       );
       res.cookie(
@@ -85,7 +90,8 @@ const refreshToken = async (req, res) => {
          {
             maxAge: 24 * 60 * 60000,
             httpOnly: true,
-            sameSite: 'none'
+            sameSite: 'none',
+            secure: true,
          }
       );
       if (data.err) {
@@ -100,36 +106,39 @@ const refreshToken = async (req, res) => {
 
 const virtualLoginUser = async (req, res, next) => {
    try {
-      const user = await service.auth.virtualLoginUser(req.query.username, req.query.password);
-      const { token, refreshToken,...data } = user;
+      const user = await service.auth.virtualLoginUser(
+         req.query.username,
+         req.query.password
+      );
+      const { token, refreshToken, ...data } = user;
       res.cookie(
          'token',
          { token },
          {
             maxAge: 2 * 60 * 60000,
             httpOnly: true,
-            sameSite: 'none'
+            sameSite: 'none',
+            secure: true,
          }
       );
       res.cookie(
-        'refreshToken',
+         'refreshToken',
          { refreshToken },
          {
             maxAge: 24 * 60 * 60000,
             httpOnly: true,
-            sameSite: 'none'
+            sameSite: 'none',
+            secure: true,
          }
       );
       if (user.err) {
          return res.status(401).json(user);
       }
       return res.status(200).json(user);
-      
    } catch (error) {
       next(error);
    }
 };
-
 
 module.exports = {
    register,
