@@ -19,7 +19,7 @@ let whiteList = [
 ];
 app.use(
    cors({
-      origin: whiteList,
+      origin: '*',
       credentials: true,
    })
 );
