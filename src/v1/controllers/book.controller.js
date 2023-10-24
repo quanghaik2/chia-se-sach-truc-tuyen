@@ -74,7 +74,7 @@ const getBookId = async (req, res, next) => {
 
 const DeleteBook = async (req, res, next) => {
     try {
-        const book = await service.book.DeleteBook(req.params.id,req.user);
+        const book = await service.book.DeleteBook(req.body.bookId,req.user);
         if(book.err) {
             return res.status(401).json(book);
         }
