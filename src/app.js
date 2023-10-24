@@ -20,19 +20,6 @@ app.use(
    cors({
       origin: whiteList,
       credentials: true,
-      allowedHeaders: [
-         'Authorization',
-         'Content-Type',
-         'Access-Control-Request-Method',
-         'X-Requested-With',
-         'Accept',
-         'Access-Control-Request-Headers',
-         'Origin',
-         'Access-Control-Allow-Headers',
-      ],
-      methods: ['GET', 'PUT', 'POST', 'DELETE', 'PATCH', 'OPTIONS', 'HEAD'],
-      exposedHeaders: ['Access-Control-Allow-Origin', 'x-auth-token'],
-      preflightContinue: true,
    })
 );
 app.use(express.json());
