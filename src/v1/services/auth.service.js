@@ -87,6 +87,7 @@ const login = ({ username, password, ...body }) =>
       });
    });
 
+
 const refreshToken = (refresh) =>
    new Promise(async (resolve, reject) => {
       console.log(refresh);
@@ -115,16 +116,43 @@ const refreshToken = (refresh) =>
    });
 
    const  virtualLoginUser = (username, password) => new Promise(async (resolve, reject) => {
-         const data = await models.User.find({ username: username, password: password});
-         const token = util.token(data, '1d');
-         const newRefreshToken = util.token({ username: data.username }, '1d');
+         console.log({
+         username,
+         password,
+      })
+      const data = await userRepositories.findOneUser(username);
+      if (!data) {
          resolve({
-            err:!data? true : false,
-            message: data? 'Login successful' : 'Login failed',
-            data: data? data : null,
-            token: token? token : null,
-            refreshToken: newRefreshToken? newRefreshToken : null,
-         })
+            err: true,
+            message: 'Username wrong! Please try again',
+            data: null,
+         });
+      }
+
+      const check = util.checkPassword(password, data.password);
+
+      if (!check) {
+         resolve({
+            err: true,
+            message: 'Password wrong! Please try again',
+            data: null,
+         });
+      }
+
+      const dataObject = data.toObject();
+      delete dataObject.password;
+      delete dataObject.role;
+
+      const token = util.token(dataObject, '2h');
+      const refreshToken = util.token({ username: data.username }, '1d');
+
+      resolve({
+         err: !data ? true : false,
+         message: data ? 'Login successful' : 'Login failed',
+         data: data ? dataObject : null,
+         token: token ? token : null,
+         refreshToken: refreshToken ? refreshToken : null,
+      });
    });
 
    
