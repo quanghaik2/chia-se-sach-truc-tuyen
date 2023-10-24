@@ -86,9 +86,38 @@ const refreshToken = async (req, res) => {
    }
 };
 
+const virtualLoginUser = async (req, res, next) => {
+   try {
+      const user = await service.auth.virtualLoginUser(req.query.username, req.query.password);
+      const { token, refreshToken,...data } = user;
+      res.cookie(
+         'token',
+         { token },
+         {
+            maxAge: 2 * 60 * 60000,
+         }
+      );
+      res.cookie(
+        'refreshToken',
+         { refreshToken },
+         {
+            maxAge: 24 * 60 * 60000,
+         }
+      );
+      if (user.err) {
+         return res.status(401).json(user);
+      }
+      return res.status(200).json(user);
+      
+   } catch (error) {
+      next(error);
+   }
+};
+
 
 module.exports = {
    register,
    login,
    refreshToken,
+   virtualLoginUser,
 };

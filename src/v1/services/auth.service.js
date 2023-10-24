@@ -114,18 +114,18 @@ const refreshToken = (refresh) =>
       });
    });
 
-   // const  virtualLoginUser = (username, password) => new Promise(async (resolve, reject) => {
-   //       const data = await models.User.find({ username: username, password: password});
-   //       const token = util.token(data, '1d');
-   //       const newRefreshToken = util.token({ username: data.username }, '1d');
-   //       resolve({
-   //          err:!data? true : false,
-   //          message: data? 'Login successful' : 'Login failed',
-   //          data: data? data : null,
-   //          token: token? token : null,
-   //          refreshToken: newRefreshToken? newRefreshToken : null,
-   //       })
-   // });
+   const  virtualLoginUser = (username, password) => new Promise(async (resolve, reject) => {
+         const data = await models.User.find({ username: username, password: password});
+         const token = util.token(data, '1d');
+         const newRefreshToken = util.token({ username: data.username }, '1d');
+         resolve({
+            err:!data? true : false,
+            message: data? 'Login successful' : 'Login failed',
+            data: data? data : null,
+            token: token? token : null,
+            refreshToken: newRefreshToken? newRefreshToken : null,
+         })
+   });
 
    
 
@@ -133,4 +133,5 @@ module.exports = {
    register,
    login,
    refreshToken,
+   virtualLoginUser,
 };
