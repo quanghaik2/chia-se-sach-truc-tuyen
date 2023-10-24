@@ -5,7 +5,7 @@ const util = require('../utils');
 // get User
 const getAllUsers = () =>
    new Promise(async (resolve, reject) => {
-      const data = await models.User.find({}).select('-password -createdAt -createdAt -__v').where({ isDeleted: false });
+      const data = await models.User.find({}).select('-password -createdAt -updatedAt -__v').where({ isDeleted: false });
       resolve({
          data: data ? data : null,
       });
@@ -13,7 +13,7 @@ const getAllUsers = () =>
 
 const getOneUser = (userId) =>
    new Promise(async (resolve, reject) => {
-      const data = await userRepositories.findByIdUser(userId).select('-password ').where({ isDeleted: false });
+      const data = await userRepositories.findByIdUser(userId).select('-password -createdAt -updatedAt -__v').where({ isDeleted: false });
       resolve({
          err: data ? false : true,
          message: data ? 'Get user successfully' : 'User not found',
@@ -23,7 +23,7 @@ const getOneUser = (userId) =>
 
 const getUserByName = (name) =>
    new Promise(async (resolve, reject) => {
-      const data = await models.User.find({ name }).select('-password ').where({ isDeleted: false });
+      const data = await models.User.find({ name }).select('-password -createdAt -updatedAt -__v').where({ isDeleted: false });
       resolve({
          err: data ? false : true,
          message: data ? 'Get user successfully' : 'User not found',
