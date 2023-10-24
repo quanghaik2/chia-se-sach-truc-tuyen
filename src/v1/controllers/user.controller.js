@@ -70,6 +70,30 @@ const getCurrent = async (req, res, next) => {
     }
 }
 
+const followUserById = async (req, res, next) => {
+    try{
+        const user = await service.user.followUserById(req.user, req.body.userId);
+        if(user.err){
+            return res.status(404).json(user);
+        }
+        return res.status(200).json(user);
+    } catch (error) {
+        next(error);
+    }
+}
+
+const unFollowUserById = async (req, res, next) => {
+    try{
+        const user = await service.user.unFollowUserById(req.user, req.body.userId);
+        if(user.err){
+            return res.status(404).json(user);
+        }
+        return res.status(200).json(user);
+    } catch (error) {
+        next(error);
+    }
+}
+
 module.exports = {
     getAllUsers,
     getOneUser,
@@ -77,4 +101,6 @@ module.exports = {
     updateUser,
     softDeleteUser,
     getCurrent,
+    followUserById,
+    unFollowUserById,
 }

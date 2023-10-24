@@ -61,6 +61,13 @@
 - **Request Params:**
   - name
 
+### Get Follow by User id
+
+- **Method:** post
+- **Endpoint:** `https://shared-books.cyclic.app/api/user/follow`
+- **body:** 
+    - userId
+
 ## Books
 
 ### Create a Book
@@ -201,3 +208,5 @@
 
 - **Method:** DELETE
 - **Endpoint:** `https://shared-books.cyclic.app/api/favorite/unFavoriteBook`
+
+

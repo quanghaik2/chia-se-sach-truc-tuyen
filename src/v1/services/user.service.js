@@ -31,6 +31,15 @@ const getUserByName = (name) =>
       });
    });
 
+   const getCurrent = (userId) => new Promise(async (resolve, reject) => {
+      const data = await models.User.findById(userId).select('-password -role');
+      resolve({
+         err: data? false : true,
+         message: data? 'Get user successfully' : 'User not found',
+         data: data? data : null,
+      });
+   });
+
 // update user
 const updateUser = (userId, { ...body }) =>
    new Promise(async (resolve, reject) => {
@@ -80,14 +89,68 @@ const softDeleteUser = (userId) =>
       });
    });
 
-const getCurrent = (userId) => new Promise(async (resolve, reject) => {
-   const data = await models.User.findById(userId);
+
+
+const followUserById = (userId, userToFollowId) => new Promise(async (resolve, reject) => {
+   if(userId === userToFollowId){
+      resolve({
+         err: true,
+         message: 'Thật hả bro mày tự follow chính mình ư',
+         
+      })
+   }
+   const user = await userRepositories.findByIdUser(userToFollowId);
+   if(!user) {
+      resolve({
+         err: true,
+         message: 'User want follow not found',
+      });
+   }
+
+   const checkFollow = await models.User.findOne({_id: userId, followedList: {$in: userToFollowId}});
+   if(checkFollow) {
+      const result = await models.User.findByIdAndUpdate(userId,{$pull: {followedList: userToFollowId}}, {new: true} );
+      if(result){
+         await models.User.findByIdAndUpdate(userToFollowId,{$pull: {followerList: userId}}, {new: true});
+      }
+      resolve({
+         err: result? false : true,
+         message: result? 'unFollow user successfully' : 'unFollow user failed',
+      });
+   }else{
+      const data = await models.User.findByIdAndUpdate(userId,{$push: {followedList: userToFollowId}} );
+      if(data){
+         await models.User.findByIdAndUpdate(userToFollowId,{$push: {followerList: userId}});
+      }
+      resolve({
+         err: data? false : true,
+         message: data? 'Follow user successfully' : 'Follow user failed',
+      });
+   }  
+
+});
+
+const unFollowUserById = (userId, userToFollowId) => new Promise(async (resolve, reject) => {
+   const user = await userRepositories.findByIdUser(userToFollowId);
+   if(!user) {
+      resolve({
+         err: true,
+         message: 'User want follow not found',
+         data: null,
+      });
+   }
+
+   const data = await models.User.findByIdAndUpdate(userId,{$pull: {followedList: userToFollowId}} );
+   if(data){
+      await models.User.findByIdAndUpdate(userToFollowId,{$pull: {followerList: userId}});
+   }
+
    resolve({
       err: data? false : true,
-      message: data? 'Get user successfully' : 'User not found',
-      data: data? data : null,
+      message: data? 'unFollow user successfully' : 'unFollow user failed',
    });
 });
+
 
 module.exports = {
    getAllUsers,
@@ -96,4 +159,6 @@ module.exports = {
    updateUser,
    softDeleteUser,
    getCurrent,
+   followUserById,
+   unFollowUserById,
 };

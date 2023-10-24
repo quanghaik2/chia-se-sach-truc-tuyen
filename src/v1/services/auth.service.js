@@ -1,3 +1,4 @@
+const models = require('../models');
 const model = require('../models');
 const userRepositories = require('../models/repositories/user.repositories');
 const util = require('../utils');
@@ -47,6 +48,10 @@ const register = ({ username, password, ...body }) =>
 
 const login = ({ username, password, ...body }) =>
    new Promise(async (resolve, reject) => {
+      console.log({
+         username,
+         password,
+      })
       const data = await userRepositories.findOneUser(username);
       if (!data) {
          resolve({
@@ -108,6 +113,19 @@ const refreshToken = (refresh) =>
          refreshToken: newRefreshToken ? newRefreshToken : null,
       });
    });
+
+   // const  virtualLoginUser = (username, password) => new Promise(async (resolve, reject) => {
+   //       const data = await models.User.find({ username: username, password: password});
+   //       const token = util.token(data, '1d');
+   //       const newRefreshToken = util.token({ username: data.username }, '1d');
+   //       resolve({
+   //          err:!data? true : false,
+   //          message: data? 'Login successful' : 'Login failed',
+   //          data: data? data : null,
+   //          token: token? token : null,
+   //          refreshToken: newRefreshToken? newRefreshToken : null,
+   //       })
+   // });
 
    
 
