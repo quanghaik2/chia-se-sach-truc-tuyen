@@ -15,12 +15,26 @@ let whiteList = [
    'http://localhost:3000',
    `${process.env.URL_FRONTEND}`,
    'https://chia-se-sach.vercel.app',
-   `https://chia-se-sach.vercel.app/api/comment`
+   `https://chia-se-sach.vercel.app/api/comment`,
 ];
 app.use(
    cors({
       origin: '*',
       credentials: true,
+      allowedHeaders: [
+         'Authorization',
+         'Content-Type',
+         'Access-Control-Request-Method',
+         'X-Requested-With',
+         'Accept',
+         'Access-Control-Request-Headers',
+         'Origin',
+         'Access-Control-Allow-Headers',
+         'Access-Control-Allow-Credentials',
+      ],
+      methods: ['GET', 'PUT', 'POST', 'DELETE', 'PATCH', 'OPTIONS', 'HEAD'],
+      exposedHeaders: ['Access-Control-Allow-Origin', 'x-auth-token'],
+      preflightContinue: true,
    })
 );
 app.use(express.json());
