@@ -72,6 +72,18 @@ const getBookId = async (req, res, next) => {
     }
 }
 
+const DeleteBook = async (req, res, next) => {
+    try {
+        const book = await service.book.DeleteBook(req.params.id,req.user);
+        if(book.err) {
+            return res.status(401).json(book);
+        }
+        return res.status(200).json(book);
+    } catch (error) {
+        next(error);
+    }
+}
+
 module.exports = {
     createBook,
     updateBook,
@@ -79,4 +91,5 @@ module.exports = {
     getAllBooks,
     getOneBook,
     getBookId,
+    DeleteBook,
 }
