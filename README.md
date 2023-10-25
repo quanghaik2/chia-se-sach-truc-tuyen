@@ -123,7 +123,7 @@
 - **Endpoint:** `https://shared-books.cyclic.app/api/comment/`
 - **Request Body:**
   - bookId
-  - comment
+  - content
 
 ### Update Comment
 

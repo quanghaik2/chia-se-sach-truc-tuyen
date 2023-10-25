@@ -54,6 +54,7 @@ const softDeleteBook = (id, userId) =>
          await models.User.findByIdAndUpdate(userId, {
             $pull: { bookList: id },
          });
+         // await models.Comment.deleteMany({bookId: id})
       }
       resolve({
          err: !data ? true : false,
@@ -93,6 +94,30 @@ const getAllBooks = () =>
       });
    });
 
+const DeleteBook = (id, userId) =>
+   new Promise(async (resolve, reject) => {
+      const checkUser = await models.Book.findOne({userId});
+      if(!checkUser){
+         resolve({
+            err: true,
+            message: 'You do not have permission to delete',
+            data: null,
+         });
+      }
+      const data = await models.Book.findByIdAndDelete(id);
+      if (data) {
+         await models.User.findByIdAndUpdate(userId, {
+            $pull: { bookList: id },
+         });
+         await models.Comment.deleteMany({bookId: id})
+      }
+      resolve({
+         err: !data ? true : false,
+         message: data ? 'Book deleted successful' : 'Book deletion failed',
+         data: data ? data : null,
+      });
+   });
+
 module.exports = {
    createBook,
    updateBook,
@@ -100,4 +125,5 @@ module.exports = {
    getOneBook,
    getBookId,
    getAllBooks,
+   DeleteBook,
 };
