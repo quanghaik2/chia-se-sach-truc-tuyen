@@ -118,12 +118,12 @@
 ### Get Pending List Books
 
 - **Method:** GET
-- **Endpoint:** `https://shared-books.cyclic.app/api/book/approvedBook`
+- **Endpoint:** `https://shared-books.cyclic.app/api/book/getPendingBooks`
 
 ### Approved Book
 
 - **Method:** POST
-- **Endpoint:** `https://shared-books.cyclic.app/api/book/getBookId/:id`
+- **Endpoint:** `https://shared-books.cyclic.app/api/book/approvedBook`
 - **Request Params:**
   - bookId
 
