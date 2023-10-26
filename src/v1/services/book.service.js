@@ -87,7 +87,7 @@ const getBookId = (id) =>
 
 const getAllBooks = () =>
    new Promise(async (resolve, reject) => {
-      const data = await models.Book.find({});
+      const data = await models.Book.find({}).select('-createdAt -updatedAt -isDeleted -__v');
       resolve({
          err: !data ? true : false,
          data: data ? data : null,
@@ -118,6 +118,26 @@ const DeleteBook = (id, userId) =>
       });
    });
 
+const getPendingBooks = () => new Promise(async (resolve, reject) => {
+   const data = await models.Book.find({status: 'pending'}).select('-createdAt -updatedAt -isDeleted -__v');
+   resolve({
+      err: !data? true : false,
+      message: data ? "Successfully retrieved the list of pending books." : "Empty book list",
+      data: data? data : null,
+   });
+})
+
+const approvedBook = (booId) => new Promise(async (resolve, reject) => {
+   const data = await models.Book.findByIdAndUpdate(booId, {
+      status: 'approved',
+   }, {new: true});
+   resolve({
+      err:!data? true : false,
+      message: data? "Successfully approved the book." : "Failed to approve the book",
+      data: data? data : null,
+   });
+})
+
 module.exports = {
    createBook,
    updateBook,
@@ -126,4 +146,6 @@ module.exports = {
    getBookId,
    getAllBooks,
    DeleteBook,
+   getPendingBooks,
+   approvedBook,
 };

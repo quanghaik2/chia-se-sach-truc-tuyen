@@ -8,11 +8,13 @@ const verifyToken = async (req, res, next) => {
         return res.status(401).json({message: 'You must be logged in!'});
     }
     const data = util.verifyToken(token.token);
-    const user = models.User.findById(data.id);
+    const user = await models.User.findOne({_id: data._id});
+    console.log(user);
     if(!user) {
         return res.status(401).json({message: 'This account has been deleted'});
     }
-    if(user.role !== "admin")
+    // console.log(user);
+    if(data.role !== "admin")
     {
         return res.status(401).json({message: 'You are not admin'});
     }

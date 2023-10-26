@@ -84,6 +84,30 @@ const DeleteBook = async (req, res, next) => {
     }
 }
 
+const getPendingBooks = async (req, res, next) => {
+    try {
+        const books = await service.book.getPendingBooks();
+        if(books.err) {
+            return res.status(401).json(books);
+        }
+        return res.status(200).json(books);
+    } catch (error) {
+        next(error);
+    }
+};
+
+const approvedBook = async (req, res, next) => {
+    try {
+        const book = await service.book.approvedBook(req.body.bookId);
+        if(book.err) {
+            return res.status(401).json(book);
+        }
+        return res.status(200).json(book);
+    } catch (error) {
+        next(error);
+    }
+};
+
 module.exports = {
     createBook,
     updateBook,
@@ -92,4 +116,6 @@ module.exports = {
     getOneBook,
     getBookId,
     DeleteBook,
+    getPendingBooks,
+    approvedBook,
 }

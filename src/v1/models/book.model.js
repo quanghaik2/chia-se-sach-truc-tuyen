@@ -39,6 +39,11 @@ const bookSchema = new Schema(
          type: Boolean,
          default: false,
       },
+      status: {
+         type: String,
+         enum: ['approved', 'pending'],
+         default: 'pending', // Ban đầu sách chờ duyệt
+      },
       createdAt: {
          type: Date,
          default: Date.now,

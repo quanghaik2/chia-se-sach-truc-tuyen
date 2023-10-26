@@ -115,6 +115,18 @@
 - **Request Params:**
   - id
 
+### Get Pending List Books
+
+- **Method:** GET
+- **Endpoint:** `https://shared-books.cyclic.app/api/book/approvedBook`
+
+### Approved Book
+
+- **Method:** POST
+- **Endpoint:** `https://shared-books.cyclic.app/api/book/getBookId/:id`
+- **Request Params:**
+  - bookId
+
 ## Comments
 
 ### Create a Comment

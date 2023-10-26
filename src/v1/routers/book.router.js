@@ -7,8 +7,10 @@ const middleware = require('../middlewares');
 router.get('/', controllers.book.getAllBooks);
 router.get('/getOneBook/:slug', controllers.book.getOneBook);
 router.get('/getBookId/:id', controllers.book.getBookId);
+router.get('/getPendingBooks', middleware.checkRole, controllers.book.getPendingBooks);
 // Post routes
 router.post('/',middleware.checkToken, controllers.book.createBook);
+router.post('/approvedBook',middleware.checkRole, controllers.book.approvedBook);
 // Put routes
 router.put('/',middleware.checkToken, controllers.book.updateBook);
 router.put('/softDelete',middleware.checkToken, controllers.book.softDeleteBook);
