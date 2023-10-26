@@ -5,4 +5,5 @@ module.exports = {
    comment: require('./comment.service'),
    favorite: require('./favorite.service'),
    report: require('./report.service'),
+   rating: require('./rating.service'),
 };

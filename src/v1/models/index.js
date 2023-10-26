@@ -4,6 +4,7 @@ module.exports = {
    Favorite: require('./favorite.model'),
    Report: require('./report.model'),
    User: require('./user.model'),
+   Rating: require('./rating.model'),
 };
 
 // export * from './book.model';

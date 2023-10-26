@@ -5,4 +5,5 @@ module.exports = {
    comment: require('./comment.controller'),
    favorite: require('./favorite.controller'),
    report: require('./report.controller'),
+   rating: require('./rating.controller'),
 };
