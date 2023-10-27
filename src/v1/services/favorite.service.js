@@ -9,17 +9,23 @@ const favoriteBook = (bookId, userId) =>
          await models.User.findByIdAndUpdate(userId, {
             $pull: { favoriteList: bookId },
          });
+         await models.Favorite.deleteOne({userId: userId, bookId: bookId});
       } else {
          const data = new Favorite({
             bookId: bookId,
             userId: userId,
          });
          await data.save();
+         if(data){
+            await models.User.findByIdAndUpdate(userId,{
+               $push: {favoriteList: bookId},
+            })
+         }
       }
 
       resolve({
          err: false,
-         message: checkFavorite
+         message: !checkFavorite
             ? 'add favorite successfully'
             : 'remove favorite successfully',
       });
