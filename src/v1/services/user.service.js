@@ -39,7 +39,6 @@ const getUserByName = (name) =>
       delete data.iat;
       delete data.exp;
       delete data.commentedList;
-      delete data.favoriteList;
       delete data.reportedList;
       delete data.followerList;
       delete data.followedList;
@@ -107,7 +106,7 @@ const followUserById = (userId, userToFollowId) => new Promise(async (resolve, r
       resolve({
          err: true,
          message: 'Thật hả bro mày tự follow chính mình ư',
-         
+
       })
    }
    const user = await userRepositories.findByIdUser(userToFollowId);
@@ -137,7 +136,7 @@ const followUserById = (userId, userToFollowId) => new Promise(async (resolve, r
          err: data? false : true,
          message: data? 'Follow user successfully' : 'Follow user failed',
       });
-   }  
+   }
 
 });
 
