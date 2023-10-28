@@ -120,6 +120,27 @@
 - **Method:** GET
 - **Endpoint:** `https://shared-books.cyclic.app/api/book/getPendingBooks`
 
+### Get List Book By Name
+
+- **Method:** GET
+- **Endpoint:** `https://shared-books.cyclic.app/api/book/getBookByName/:name`
+- **Request Params:**
+  - name
+
+### Get List Book By name user
+
+- **Method:** GET
+- **Endpoint:** `https://shared-books.cyclic.app/api/book/getBookByUser/:nameUser`
+- **Request Params:**
+  - nameUser
+
+### Get List Book by query 
+
+- **Method:** GET
+- **Endpoint:** `https://shared-books.cyclic.app/api/book/searchBook`
+- **Request Query:**
+  // truyền 1 trong 2 nameUser hoặc title 
+
 ### Approved Book
 
 - **Method:** POST

@@ -47,6 +47,7 @@ const updateBook = ({ bookId, ...body }) =>
 
 const softDeleteBook = (id, userId) =>
    new Promise(async (resolve, reject) => {
+      console.log(id)
       const data = await models.Book.findByIdAndUpdate(id, {
          isDeleted: true,
       });
@@ -127,6 +128,59 @@ const getPendingBooks = () => new Promise(async (resolve, reject) => {
    });
 })
 
+const getBookByUser = (nameUser) => new Promise(async (resolve, reject) => {
+   const User = await models.User.findOne({name: nameUser});
+   if(!User) {
+      resolve({
+         err: true,
+         message: 'User not found',
+         data: null,
+      });
+   }
+   const data = await models.Book.find({userId: User.id});
+   resolve({
+      err:!data? true : false,
+      message: data? "Successfully retrieved the user's book list" : "Empty book list",
+      data: data? data : null,
+   });
+})
+
+const getBookByName = (name) => new Promise(async (resolve, reject) => {
+   const data = await models.Book.find({title: name});
+   resolve({
+      err:!data? true : false,
+      message: data? "Successfully retrieved book list by book title" : "Empty book list",
+      data: data? data : null,
+   });
+})
+
+const searchBook = ({...query}) => new Promise(async (resolve, reject) =>{
+   const checkNameUser = query.hasOwnProperty('nameUser');
+   let idUser;
+   if(checkNameUser){
+      const User = await models.User.findOne({name: query.nameUser});
+      if(!User) {
+         resolve({
+            err: true,
+            message: 'User not found',
+            data: null,
+         });
+      }
+      idUser  = User.id; 
+   }
+
+   query.userId  = idUser;
+   delete query.nameUser;
+   console.log(query);
+   
+   const data = await models.Book.find(query);
+   resolve({
+      err:!data? true : false,
+      message: data? "Successfully retrieved book list by book title" : "Empty book list",
+      data: data? data : null,
+   });
+})
+
 const approvedBook = (booId) => new Promise(async (resolve, reject) => {
    const data = await models.Book.findByIdAndUpdate(booId, {
       status: 'approved',
@@ -138,6 +192,8 @@ const approvedBook = (booId) => new Promise(async (resolve, reject) => {
    });
 })
 
+
+
 module.exports = {
    createBook,
    updateBook,
@@ -147,5 +203,8 @@ module.exports = {
    getAllBooks,
    DeleteBook,
    getPendingBooks,
+   getBookByUser,
+   getBookByName,
+   searchBook,
    approvedBook,
 };

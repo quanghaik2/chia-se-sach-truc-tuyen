@@ -96,6 +96,42 @@ const getPendingBooks = async (req, res, next) => {
     }
 };
 
+const getBookByUser = async (req, res, next) => {
+    try {
+        const books = await service.book.getBookByUser(req.params.nameUser);
+        if(books.err) {
+            return res.status(401).json(books);
+        }
+        return res.status(200).json(books);
+    } catch (error) {
+        next(error);
+    }
+}
+
+const getBookByName = async (req, res, next) => {
+    try {
+        const books = await service.book.getBookByName(req.params.name);
+        if(books.err) {
+            return res.status(401).json(books);
+        }
+        return res.status(200).json(books);
+    } catch (error) {
+        next(error);
+    }
+}
+
+const searchBook = async (req, res, next) => {
+    try {
+        const books = await service.book.searchBook(req.query);
+        if(books.err) {
+            return res.status(401).json(books);
+        }
+        return res.status(200).json(books);
+    } catch (error) {
+        next(error);
+    }
+}
+
 const approvedBook = async (req, res, next) => {
     try {
         const book = await service.book.approvedBook(req.body.bookId);
@@ -117,5 +153,8 @@ module.exports = {
     getBookId,
     DeleteBook,
     getPendingBooks,
+    getBookByUser,
+    getBookByName,
     approvedBook,
+    searchBook,
 }
