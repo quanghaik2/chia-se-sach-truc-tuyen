@@ -5,7 +5,7 @@ module.exports = {
       try {
          const result = await report.getAllReports();
          res.status(200).json({
-            error: 'false',
+            error: false,
             message: 'Get all reports successfully',
             data: result,
          });
@@ -19,7 +19,7 @@ module.exports = {
          const userId = req.body.userId || req.user;
          const result = await report.createReport(userId, req.body);
          res.status(201).json({
-            error: 'false',
+            error: false,
             message: 'Create report successfully',
             data: result,
          });
@@ -33,7 +33,7 @@ module.exports = {
          const { reportId } = req.params;
          const result = await report.updateReport(reportId, req.body);
          res.status(200).json({
-            error: 'false',
+            error: false,
             message: 'Update report successfully',
             data: result,
          });
@@ -47,7 +47,7 @@ module.exports = {
          const { reportId } = req.params;
          const result = await report.deleteReport(reportId);
          res.status(200).json({
-            error: 'false',
+            error: false,
             message: 'Delete report successfully',
             data: result,
          });
@@ -61,7 +61,7 @@ module.exports = {
          const { userId } = req.params;
          const result = await report.getReports(userId);
          res.status(200).json({
-            error: 'false',
+            error: false,
             message: 'Get list reports by userId successfully',
             data: result,
          });
@@ -75,7 +75,7 @@ module.exports = {
          const { reportId } = req.params;
          const result = await report.getReportById(reportId);
          res.status(200).json({
-            error: 'false',
+            error: false,
             message: 'Get one report by id successfully',
             data: result,
          });
