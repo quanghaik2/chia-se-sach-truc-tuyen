@@ -65,8 +65,8 @@
 
 - **Method:** post
 - **Endpoint:** `https://shared-books.cyclic.app/api/user/follow`
-- **body:** 
-    - userId
+- **body:**
+  - userId
 
 ## Books
 
@@ -134,12 +134,12 @@
 - **Request Params:**
   - nameUser
 
-### Get List Book by query 
+### Get List Book by query
 
 - **Method:** GET
 - **Endpoint:** `https://shared-books.cyclic.app/api/book/searchBook`
 - **Request Query:**
-  // truyền 1 trong 2 nameUser hoặc title 
+   // truyền 1 trong 2 nameUser hoặc title
 
 ### Approved Book
 
@@ -193,10 +193,12 @@
 ## API Report
 
 - **Get all comments**
+
   - **Endpoint:** `https://shared-books.cyclic.app/api/report/`
   - **Method:** GET
 
 - **Create Report**
+
   - **Endpoint:** `https://shared-books.cyclic.app/api/report/`
   - **Method:** POST
   - **Body:**
@@ -207,6 +209,7 @@
   - **User:** id (userId or req.body.userId)
 
 - **Update Report**
+
   - **Endpoint:** `https://shared-books.cyclic.app/api/report/:reportId`
   - **Method:** PATCH
   - **Body:**
@@ -220,26 +223,87 @@
   - **Params:**
     - reportId
 
+## API Rating
+
+- **Get all rating**
+
+  - **Endpoint:** `https://shared-books.cyclic.app/api/rating/`
+  - **Method:** GET
+
+- **Get list rating by bookId**
+
+  - **Endpoint:** `https://shared-books.cyclic.app/api/rating/list`
+  - **Method:** GET
+  - **Query:**
+    - bookId
+
+- **Get list rating by userId**
+
+  - **Endpoint:** `https://shared-books.cyclic.app/api/rating/list`
+  - **Method:** GET
+  - **Query:**
+    - userId
+
+- **Create rating**
+
+  - **Endpoint:** `https://shared-books.cyclic.app/api/rating`
+  - **Method:** POST
+  - **Body:**
+    - bookId
+    - rate
+    - userId (allow null if have req.user / logged)
+
+- **Update rating by bookId, userId**
+
+  - **Endpoint:** `https://shared-books.cyclic.app/api/rating`
+  - **Method:** PUT
+  - **Body:**
+    - bookId
+    - userId
+    - rate
+
+- **Update rating by id**
+
+  - **Endpoint:** `https://shared-books.cyclic.app/api/rating`
+  - **Method:** PUT
+  - **Body:**
+    - id
+    - rate
+
+- **Delete rating by bookId, userId**
+
+  - **Endpoint:** `https://shared-books.cyclic.app/api/rating`
+  - **Method:** DELETE
+  - **Body:**
+    - bookId
+    - userId
+    - rate
+
+- **Delete rating by id**
+
+  - **Endpoint:** `https://shared-books.cyclic.app/api/rating`
+  - **Method:** DELETE
+  - **Body:**
+    - id
+    - rate
+
 ## Favorite
 
 ### Get Favorite by User
 
 - **Method:** get
 - **Endpoint:** `https://shared-books.cyclic.app/api/favorite/getFavoriteByUser`
-- **body:** 
-    - bookId
-
+- **body:**
+  - bookId
 
 ### Favorite Book
 
 - **Method:** POST
 - **Endpoint:** `https://shared-books.cyclic.app/api/favorite/favoriteBook`
-- **body:** 
-    - bookId
+- **body:**
+  - bookId
 
 ### Unfavorite Book
 
 - **Method:** DELETE
 - **Endpoint:** `https://shared-books.cyclic.app/api/favorite/unFavoriteBook`
-
-

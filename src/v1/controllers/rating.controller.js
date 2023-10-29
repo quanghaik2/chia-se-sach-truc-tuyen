@@ -19,7 +19,7 @@ module.exports = {
       try {
          const { userId, bookId } = req.query;
          if (!userId && !bookId) {
-            res.status(200).json({ message: 'No ratings found' });
+            return res.status(200).json({ message: 'No ratings found' });
          }
 
          if (userId && userId !== null && userId !== '') {
@@ -50,14 +50,13 @@ module.exports = {
          }
 
          const isCreated = await rating.createRating(userId, bookId, rate);
-
-         if (isCreated) {
+         if (isCreated.error)
             return res
-               .status(201)
-               .json({ message: 'Create successfully', data: isCreated });
-         }
-
-         res.status(400).json({ message: 'Rating already exist' });
+               .status(400)
+               .json({ message: isCreated.message, data: null });
+         return res
+            .status(201)
+            .json({ message: 'Create successfully', data: isCreated });
       } catch (error) {
          next(error);
       }
@@ -65,7 +64,8 @@ module.exports = {
 
    async updateRating(req, res, next) {
       try {
-         const { userId, bookId, rate, id } = req.body;
+         const { bookId, rate, id } = req.body;
+         const userId = req?.user || req.body?.userId;
 
          if (id && id !== '' && id !== null) {
             const isUpdated = await rating.updateRatingById(id, rate);
@@ -78,7 +78,6 @@ module.exports = {
 
             return res.status(400).json({ message: 'Rating not found' });
          }
-
          if (!userId || !bookId) {
             return res.status(400).json({ message: 'Missing fields' });
          }
