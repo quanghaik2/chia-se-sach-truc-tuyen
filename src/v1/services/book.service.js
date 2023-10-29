@@ -171,12 +171,21 @@ const searchBook = ({...query}) => new Promise(async (resolve, reject) =>{
 
    query.userId  = idUser;
    delete query.nameUser;
+   
    console.log(query);
    
-   const data = await models.Book.find(query);
+   const data = await models.Book.find({
+      $or: [
+      {
+         'userId': query.userId,
+         
+      }, {
+         'title': query.title,
+      }
+      ]});
    resolve({
       err:!data? true : false,
-      message: data? "Successfully retrieved book list by book title" : "Empty book list",
+      message: data.length > 0? "Successfully retrieved book list by book title" : "Empty book list",
       data: data? data : null,
    });
 })
