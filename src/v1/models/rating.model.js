@@ -5,7 +5,7 @@ const DOCUMENT_NAME = 'Rating';
 
 const ratingSchema = new Schema(
    {
-      userId: {
+      user: {
          type: Schema.Types.ObjectId,
          ref: 'User',
          required: true,
@@ -14,7 +14,7 @@ const ratingSchema = new Schema(
          type: Number,
          default: 5,
       },
-      bookId: {
+      book: {
          type: Schema.Types.ObjectId,
          ref: 'Book',
       },

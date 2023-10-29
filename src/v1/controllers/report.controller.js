@@ -16,7 +16,7 @@ module.exports = {
 
    async createReport(req, res, next) {
       try {
-         const userId = req.body.userId || req.user;
+         const userId = req?.user || req.body?.userId;
          const result = await report.createReport(userId, req.body);
          res.status(201).json({
             error: false,
